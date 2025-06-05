@@ -46,20 +46,28 @@ func (sp *StringPool) Intern(s string) string {
 	return s
 }
 
+type MatchResult struct {
+	Strings     []string
+	LineNumbers []int
+	CharOffsets []int
+}
+
 type matchProcessor struct {
 	fc       []byte
 	pool     *StringPool
 	matches  []yarax.Match
 	patterns []yarax.Pattern
+	lineInfo bool
 	mu       sync.Mutex
 }
 
-func newMatchProcessor(fc []byte, matches []yarax.Match, mp []yarax.Pattern) *matchProcessor {
+func newMatchProcessor(fc []byte, matches []yarax.Match, mp []yarax.Pattern, lineInfo bool) *matchProcessor {
 	return &matchProcessor{
 		fc:       fc,
 		pool:     NewStringPool(len(matches)),
 		matches:  matches,
 		patterns: mp,
+		lineInfo: lineInfo,
 	}
 }
 
@@ -72,15 +80,17 @@ var matchResultPool = sync.Pool{
 
 // process performantly handles the conversion of matched data to strings.
 // yara-x does not expose the rendered string via the API due to performance overhead.
-func (mp *matchProcessor) process() []string {
+func (mp *matchProcessor) process() *MatchResult {
 	if len(mp.matches) == 0 {
-		return nil
+		return &MatchResult{}
 	}
 
 	mp.mu.Lock()
 	defer mp.mu.Unlock()
 
 	var result *[]string
+	var lineNumbers []int
+	var charOffsets []int
 	var ok bool
 	if result, ok = matchResultPool.Get().(*[]string); ok {
 		*result = (*result)[:0]
@@ -89,6 +99,11 @@ func (mp *matchProcessor) process() []string {
 		result = &slice
 	}
 	defer matchResultPool.Put(result)
+
+	if mp.lineInfo {
+		lineNumbers = make([]int, 0, len(mp.matches))
+		charOffsets = make([]int, 0, len(mp.matches))
+	}
 
 	initializeOnce.Do(func() {
 		matchPool = pool.NewBufferPool(len(mp.matches))
@@ -119,6 +134,11 @@ func (mp *matchProcessor) process() []string {
 			} else {
 				*result = append(*result, mp.pool.Intern(string(matchBytes)))
 			}
+
+			if mp.lineInfo {
+				lineNumbers = append(lineNumbers, calculateLineNumber(mp.fc, o))
+				charOffsets = append(charOffsets, calculateCharOffset(mp.fc, o))
+			}
 		} else {
 			if patterns == nil || cap(patterns) < patternsCap {
 				patterns = make([]string, 0, patternsCap)
@@ -129,13 +149,23 @@ func (mp *matchProcessor) process() []string {
 				patterns = append(patterns, p.Identifier())
 			}
 			*result = append(*result, slices.Compact(patterns)...)
+
+			if mp.lineInfo {
+				// For pattern matches, we still record the line number and char offset
+				lineNumbers = append(lineNumbers, calculateLineNumber(mp.fc, o))
+				charOffsets = append(charOffsets, calculateCharOffset(mp.fc, o))
+			}
 		}
 	}
 
 	finalResult := make([]string, len(*result))
 	copy(finalResult, *result)
 
-	return finalResult
+	return &MatchResult{
+		Strings:     finalResult,
+		LineNumbers: lineNumbers,
+		CharOffsets: charOffsets,
+	}
 }
 
 // containsUnprintable determines if a byte is a valid character.
@@ -146,4 +176,38 @@ func containsUnprintable(b []byte) bool {
 		}
 	}
 	return false
+}
+
+// calculateLineNumber calculates the line number for a given byte offset.
+func calculateLineNumber(content []byte, offset int) int {
+	if offset < 0 || offset > len(content) {
+		return 0
+	}
+
+	lineNumber := 1
+	for i := 0; i < offset && i < len(content); i++ {
+		if content[i] == '\n' {
+			lineNumber++
+		}
+	}
+	return lineNumber
+}
+
+// calculateCharOffset calculates the character offset within a line for a given byte offset.
+func calculateCharOffset(content []byte, offset int) int {
+	if offset < 0 || offset > len(content) {
+		return 0
+	}
+
+	// Find the last newline before the offset
+	lastNewline := -1
+	for i := 0; i < offset && i < len(content); i++ {
+		if content[i] == '\n' {
+			lastNewline = i
+		}
+	}
+
+	// Character offset is the distance from the last newline
+	// If no newline found, it's from the beginning of the file
+	return offset - lastNewline - 1
 }

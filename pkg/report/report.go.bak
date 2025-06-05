@@ -487,7 +487,6 @@ func Generate(ctx context.Context, path string, mrs *yarax.ScanResults, c malcon
 			ID:           key,
 			MatchStrings: matchStrings(m.Identifier(), matchedStrings),
 			LineNumbers:  matchResult.LineNumbers,
-			CharOffsets:  matchResult.CharOffsets,
 			RiskLevel:    RiskLevels[risk],
 			RiskScore:    risk,
 			RuleName:     m.Identifier(),

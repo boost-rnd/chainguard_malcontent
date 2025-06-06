@@ -80,14 +80,22 @@ openssl enc -aes-256-cbc
 	// Check that line numbers are present for behaviors with matches
 	var foundLineNumbers bool
 	for _, behavior := range fileReport.Behaviors {
-		if len(behavior.MatchStrings) > 0 && len(behavior.LineNumbers) > 0 {
+		if len(behavior.MatchStrings) > 0 && behavior.StartingLine > 0 {
 			foundLineNumbers = true
 
 			// Verify line numbers are reasonable (between 1 and total lines)
-			for _, lineNum := range behavior.LineNumbers {
-				if lineNum < 1 || lineNum > 7 { // We have 7 lines in our test file
-					t.Errorf("Invalid line number %d", lineNum)
-				}
+			if behavior.StartingLine < 1 || behavior.StartingLine > 7 { // We have 7 lines in our test file
+				t.Errorf("Invalid starting line number %d", behavior.StartingLine)
+			}
+			if behavior.EndingLine < behavior.StartingLine || behavior.EndingLine > 7 {
+				t.Errorf("Invalid ending line number %d", behavior.EndingLine)
+			}
+			// Check that offsets are valid
+			if behavior.StartingOffset < 0 {
+				t.Errorf("Invalid starting offset %d", behavior.StartingOffset)
+			}
+			if behavior.EndingOffset < 0 {
+				t.Errorf("Invalid ending offset %d", behavior.EndingOffset)
 			}
 		}
 	}
@@ -117,7 +125,7 @@ openssl enc -aes-256-cbc
 	frs2.Files.Range(func(_, value any) bool {
 		if fr, ok := value.(*malcontent.FileReport); ok {
 			for _, behavior := range fr.Behaviors {
-				if len(behavior.LineNumbers) > 0 {
+				if behavior.StartingLine > 0 || behavior.EndingLine > 0 {
 					t.Error("Line numbers found when line info is disabled")
 				}
 			}
@@ -184,7 +192,7 @@ func TestScanBinaryWithLineInfo(t *testing.T) {
 }
 
 func TestScanWithLineInfoJSON(t *testing.T) {
-	// Test JSON output with line info to verify line number splitting
+	// Test JSON output with line info to verify starting/ending line behavior
 	tmpDir := t.TempDir()
 
 	// Create a test file with patterns that will match on multiple lines
@@ -241,43 +249,30 @@ openssl dgst -sha256 file.txt
 		t.Fatalf("Failed to parse JSON output: %v", err)
 	}
 
-	// Find behaviors that should have multiple matches
+	// Check behaviors have proper line info
 	for _, fileReport := range output.Files {
-		// Count behaviors by ID
-		behaviorCounts := make(map[string]int)
-		lineNumbersByID := make(map[string][]int)
-
 		for _, behavior := range fileReport.Behaviors {
-			behaviorCounts[behavior.ID]++
-			if len(behavior.LineNumbers) > 0 {
-				lineNumbersByID[behavior.ID] = append(lineNumbersByID[behavior.ID], behavior.LineNumbers[0])
-			}
-		}
-
-		// Check that behaviors with multiple line matches are split
-		for id, lines := range lineNumbersByID {
-			if len(lines) > 1 {
-				// Each behavior should have exactly one line number
-				for _, behavior := range fileReport.Behaviors {
-					if behavior.ID == id && len(behavior.LineNumbers) > 1 {
-						t.Errorf("Behavior %s has multiple line numbers in JSON output: %v",
-							id, behavior.LineNumbers)
-					}
+			if behavior.StartingLine > 0 {
+				// Verify starting and ending lines are valid
+				if behavior.StartingLine < 1 || behavior.StartingLine > 9 {
+					t.Errorf("Invalid starting line %d for behavior %s", behavior.StartingLine, behavior.ID)
+				}
+				if behavior.EndingLine < behavior.StartingLine || behavior.EndingLine > 9 {
+					t.Errorf("Invalid ending line %d for behavior %s", behavior.EndingLine, behavior.ID)
 				}
 
-				// Verify line numbers are unique
-				seen := make(map[int]bool)
-				for _, line := range lines {
-					if seen[line] {
-						t.Errorf("Duplicate line number %d for behavior %s", line, id)
-					}
-					seen[line] = true
+				// Verify offsets are valid
+				if behavior.StartingOffset < 0 {
+					t.Errorf("Invalid starting offset %d for behavior %s", behavior.StartingOffset, behavior.ID)
+				}
+				if behavior.EndingOffset < 0 {
+					t.Errorf("Invalid ending offset %d for behavior %s", behavior.EndingOffset, behavior.ID)
 				}
 			}
 		}
 	}
 
-	// Test with line info disabled - behaviors should not be split
+	// Test with line info disabled
 	jsonBuf.Reset()
 	config.LineInfo = false
 
@@ -295,17 +290,11 @@ openssl dgst -sha256 file.txt
 		t.Fatalf("Failed to parse JSON output without line info: %v", err)
 	}
 
-	// Without line info, behaviors should not be split
+	// Without line info, behaviors should not have line numbers
 	for _, fileReport := range output2.Files {
-		behaviorIDs := make(map[string]int)
 		for _, behavior := range fileReport.Behaviors {
-			behaviorIDs[behavior.ID]++
-		}
-
-		// Each unique behavior ID should appear only once
-		for id, count := range behaviorIDs {
-			if count > 1 {
-				t.Errorf("Behavior %s appears %d times when line info is disabled", id, count)
+			if behavior.StartingLine > 0 || behavior.EndingLine > 0 {
+				t.Errorf("Behavior %s has line info when it should be disabled", behavior.ID)
 			}
 		}
 	}

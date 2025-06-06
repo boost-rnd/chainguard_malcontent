@@ -484,14 +484,16 @@ func Generate(ctx context.Context, path string, mrs *yarax.ScanResults, c malcon
 		}
 
 		b := &malcontent.Behavior{
-			ID:           key,
-			MatchStrings: matchStrings(m.Identifier(), matchedStrings),
-			LineNumbers:  matchResult.LineNumbers,
-			CharOffsets:  matchResult.CharOffsets,
-			RiskLevel:    RiskLevels[risk],
-			RiskScore:    risk,
-			RuleName:     m.Identifier(),
-			RuleURL:      ruleURL,
+			ID:             key,
+			MatchStrings:   matchStrings(m.Identifier(), matchedStrings),
+			StartingLine:   matchResult.StartingLine,
+			EndingLine:     matchResult.EndingLine,
+			StartingOffset: matchResult.StartingOffset,
+			EndingOffset:   matchResult.EndingOffset,
+			RiskLevel:      RiskLevels[risk],
+			RiskScore:      risk,
+			RuleName:       m.Identifier(),
+			RuleURL:        ruleURL,
 		}
 
 		k := ""

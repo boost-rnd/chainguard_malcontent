@@ -47,9 +47,11 @@ func (sp *StringPool) Intern(s string) string {
 }
 
 type MatchResult struct {
-	Strings     []string
-	LineNumbers []int
-	CharOffsets []int
+	Strings        []string
+	StartingLine   int
+	EndingLine     int
+	StartingOffset int
+	EndingOffset   int
 }
 
 type matchProcessor struct {
@@ -89,8 +91,6 @@ func (mp *matchProcessor) process() *MatchResult {
 	defer mp.mu.Unlock()
 
 	var result *[]string
-	var lineNumbers []int
-	var charOffsets []int
 	var ok bool
 	if result, ok = matchResultPool.Get().(*[]string); ok {
 		*result = (*result)[:0]
@@ -100,10 +100,9 @@ func (mp *matchProcessor) process() *MatchResult {
 	}
 	defer matchResultPool.Put(result)
 
-	if mp.lineInfo {
-		lineNumbers = make([]int, 0, len(mp.matches))
-		charOffsets = make([]int, 0, len(mp.matches))
-	}
+	// Track the overall range of matches
+	var startingLine, endingLine, startingOffset, endingOffset int
+	firstMatch := true
 
 	initializeOnce.Do(func() {
 		matchPool = pool.NewBufferPool(len(mp.matches))
@@ -136,8 +135,7 @@ func (mp *matchProcessor) process() *MatchResult {
 			}
 
 			if mp.lineInfo {
-				lineNumbers = append(lineNumbers, calculateLineNumber(mp.fc, o))
-				charOffsets = append(charOffsets, calculateCharOffset(mp.fc, o))
+				mp.updateLineInfo(o, l, &startingLine, &endingLine, &startingOffset, &endingOffset, &firstMatch)
 			}
 		} else {
 			if patterns == nil || cap(patterns) < patternsCap {
@@ -151,9 +149,7 @@ func (mp *matchProcessor) process() *MatchResult {
 			*result = append(*result, slices.Compact(patterns)...)
 
 			if mp.lineInfo {
-				// For pattern matches, we still record the line number and char offset
-				lineNumbers = append(lineNumbers, calculateLineNumber(mp.fc, o))
-				charOffsets = append(charOffsets, calculateCharOffset(mp.fc, o))
+				mp.updateLineInfo(o, l, &startingLine, &endingLine, &startingOffset, &endingOffset, &firstMatch)
 			}
 		}
 	}
@@ -162,9 +158,37 @@ func (mp *matchProcessor) process() *MatchResult {
 	copy(finalResult, *result)
 
 	return &MatchResult{
-		Strings:     finalResult,
-		LineNumbers: lineNumbers,
-		CharOffsets: charOffsets,
+		Strings:        finalResult,
+		StartingLine:   startingLine,
+		EndingLine:     endingLine,
+		StartingOffset: startingOffset,
+		EndingOffset:   endingOffset,
+	}
+}
+
+// updateLineInfo updates the line and offset tracking for a match.
+func (mp *matchProcessor) updateLineInfo(offset, length int, startLine, endLine, startOffset, endOffset *int, firstMatch *bool) {
+	matchStartLine := calculateLineNumber(mp.fc, offset)
+	matchStartOffset := calculateCharOffset(mp.fc, offset)
+	matchEndLine := calculateLineNumber(mp.fc, offset+length-1)
+	matchEndOffset := calculateCharOffset(mp.fc, offset+length-1)
+
+	if *firstMatch {
+		*startLine = matchStartLine
+		*startOffset = matchStartOffset
+		*endLine = matchEndLine
+		*endOffset = matchEndOffset
+		*firstMatch = false
+	} else {
+		// Update the range to include this match
+		if matchStartLine < *startLine || (matchStartLine == *startLine && matchStartOffset < *startOffset) {
+			*startLine = matchStartLine
+			*startOffset = matchStartOffset
+		}
+		if matchEndLine > *endLine || (matchEndLine == *endLine && matchEndOffset > *endOffset) {
+			*endLine = matchEndLine
+			*endOffset = matchEndOffset
+		}
 	}
 }
 

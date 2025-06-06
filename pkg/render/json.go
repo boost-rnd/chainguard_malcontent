@@ -53,6 +53,7 @@ func (r JSON) Full(ctx context.Context, c *malcontent.Config, rep *malcontent.Re
 					// Filter out diff-related fields
 					r.ArchiveRoot = ""
 					r.FullPath = ""
+
 					jr.Files[path] = r
 				}
 			}

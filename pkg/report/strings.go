@@ -46,20 +46,30 @@ func (sp *StringPool) Intern(s string) string {
 	return s
 }
 
+type MatchResult struct {
+	Strings        []string
+	StartingLine   int
+	EndingLine     int
+	StartingOffset int
+	EndingOffset   int
+}
+
 type matchProcessor struct {
 	fc       []byte
 	pool     *StringPool
 	matches  []yarax.Match
 	patterns []yarax.Pattern
+	lineInfo bool
 	mu       sync.Mutex
 }
 
-func newMatchProcessor(fc []byte, matches []yarax.Match, mp []yarax.Pattern) *matchProcessor {
+func newMatchProcessor(fc []byte, matches []yarax.Match, mp []yarax.Pattern, lineInfo bool) *matchProcessor {
 	return &matchProcessor{
 		fc:       fc,
 		pool:     NewStringPool(len(matches)),
 		matches:  matches,
 		patterns: mp,
+		lineInfo: lineInfo,
 	}
 }
 
@@ -72,9 +82,9 @@ var matchResultPool = sync.Pool{
 
 // process performantly handles the conversion of matched data to strings.
 // yara-x does not expose the rendered string via the API due to performance overhead.
-func (mp *matchProcessor) process() []string {
+func (mp *matchProcessor) process() *MatchResult {
 	if len(mp.matches) == 0 {
-		return nil
+		return &MatchResult{}
 	}
 
 	mp.mu.Lock()
@@ -89,6 +99,10 @@ func (mp *matchProcessor) process() []string {
 		result = &slice
 	}
 	defer matchResultPool.Put(result)
+
+	// Track the overall range of matches
+	var startingLine, endingLine, startingOffset, endingOffset int
+	firstMatch := true
 
 	initializeOnce.Do(func() {
 		matchPool = pool.NewBufferPool(len(mp.matches))
@@ -119,6 +133,10 @@ func (mp *matchProcessor) process() []string {
 			} else {
 				*result = append(*result, mp.pool.Intern(string(matchBytes)))
 			}
+
+			if mp.lineInfo {
+				mp.updateLineInfo(o, l, &startingLine, &endingLine, &startingOffset, &endingOffset, &firstMatch)
+			}
 		} else {
 			if patterns == nil || cap(patterns) < patternsCap {
 				patterns = make([]string, 0, patternsCap)
@@ -129,13 +147,49 @@ func (mp *matchProcessor) process() []string {
 				patterns = append(patterns, p.Identifier())
 			}
 			*result = append(*result, slices.Compact(patterns)...)
+
+			if mp.lineInfo {
+				mp.updateLineInfo(o, l, &startingLine, &endingLine, &startingOffset, &endingOffset, &firstMatch)
+			}
 		}
 	}
 
 	finalResult := make([]string, len(*result))
 	copy(finalResult, *result)
 
-	return finalResult
+	return &MatchResult{
+		Strings:        finalResult,
+		StartingLine:   startingLine,
+		EndingLine:     endingLine,
+		StartingOffset: startingOffset,
+		EndingOffset:   endingOffset,
+	}
+}
+
+// updateLineInfo updates the line and offset tracking for a match.
+func (mp *matchProcessor) updateLineInfo(offset, length int, startLine, endLine, startOffset, endOffset *int, firstMatch *bool) {
+	matchStartLine := calculateLineNumber(mp.fc, offset)
+	matchStartOffset := calculateCharOffset(mp.fc, offset)
+	matchEndLine := calculateLineNumber(mp.fc, offset+length-1)
+	matchEndOffset := calculateCharOffset(mp.fc, offset+length-1)
+
+	if *firstMatch {
+		*startLine = matchStartLine
+		*startOffset = matchStartOffset
+		*endLine = matchEndLine
+		*endOffset = matchEndOffset
+		*firstMatch = false
+	} else {
+		// Update the range to include this match
+		if matchStartLine < *startLine || (matchStartLine == *startLine && matchStartOffset < *startOffset) {
+			*startLine = matchStartLine
+			*startOffset = matchStartOffset
+		}
+		if matchEndLine > *endLine || (matchEndLine == *endLine && matchEndOffset > *endOffset) {
+			*endLine = matchEndLine
+			*endOffset = matchEndOffset
+		}
+	}
 }
 
 // containsUnprintable determines if a byte is a valid character.
@@ -146,4 +200,38 @@ func containsUnprintable(b []byte) bool {
 		}
 	}
 	return false
+}
+
+// calculateLineNumber calculates the line number for a given byte offset.
+func calculateLineNumber(content []byte, offset int) int {
+	if offset < 0 || offset > len(content) {
+		return 0
+	}
+
+	lineNumber := 1
+	for i := 0; i < offset && i < len(content); i++ {
+		if content[i] == '\n' {
+			lineNumber++
+		}
+	}
+	return lineNumber
+}
+
+// calculateCharOffset calculates the character offset within a line for a given byte offset.
+func calculateCharOffset(content []byte, offset int) int {
+	if offset < 0 || offset > len(content) {
+		return 0
+	}
+
+	// Find the last newline before the offset
+	lastNewline := -1
+	for i := 0; i < offset && i < len(content); i++ {
+		if content[i] == '\n' {
+			lastNewline = i
+		}
+	}
+
+	// Character offset is the distance from the last newline
+	// If no newline found, it's from the beginning of the file
+	return offset - lastNewline - 1
 }

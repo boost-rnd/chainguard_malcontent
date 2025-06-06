@@ -17,7 +17,7 @@ permissions:
 jobs:
   test:
     if: ${{ github.repository }} == 'chainguard-dev/malcontent'
-    runs-on: mal-ubuntu-latest-8-core
+    runs-on: ubuntu-latest
     container:
       image: cgr.dev/chainguard/wolfi-base@sha256:91ed94ec4e72368a9b5113f2ffb1d8e783a91db489011a89d9fad3e3816a75ba
       options: >-
@@ -26,7 +26,7 @@ jobs:
         --cap-add SETUID
         --cap-drop ALL
         --cgroupns private
-        --cpu-shares=8192
+        --cpu-shares=4096
         --memory-swappiness=0
         --security-opt no-new-privileges
         --ulimit core=0
@@ -52,7 +52,7 @@ jobs:
 
   integration:
     if: ${{ github.repository }} == 'chainguard-dev/malcontent'
-    runs-on: mal-ubuntu-latest-8-core
+    runs-on: ubuntu-latest
     container:
       image: cgr.dev/chainguard/wolfi-base@sha256:91ed94ec4e72368a9b5113f2ffb1d8e783a91db489011a89d9fad3e3816a75ba
       options: >-
@@ -61,7 +61,7 @@ jobs:
         --cap-add SETUID
         --cap-drop ALL
         --cgroupns private
-        --cpu-shares=8192
+        --cpu-shares=4096
         --memory-swappiness=0
         --security-opt no-new-privileges
         --ulimit core=0

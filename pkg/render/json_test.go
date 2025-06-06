@@ -9,103 +9,96 @@ import (
 	"github.com/chainguard-dev/malcontent/pkg/malcontent"
 )
 
-func TestJSONLineNumberSplitting(t *testing.T) {
+func TestJSONLineInfoOutput(t *testing.T) {
 	tests := []struct {
-		name          string
-		lineInfo      bool
-		behaviors     []*malcontent.Behavior
-		expectedCount int
-		expectedLines [][]int
+		name      string
+		lineInfo  bool
+		behaviors []*malcontent.Behavior
 	}{
 		{
-			name:     "Line info disabled - no splitting",
+			name:     "Line info disabled - no line numbers",
 			lineInfo: false,
 			behaviors: []*malcontent.Behavior{
 				{
-					ID:          "test/behavior",
-					Description: "Test behavior",
-					LineNumbers: []int{10, 20, 30},
-					RiskScore:   2,
-					RiskLevel:   "MEDIUM",
+					ID:             "test/behavior",
+					Description:    "Test behavior",
+					StartingLine:   0, // Should be 0 when line info is disabled
+					EndingLine:     0,
+					StartingOffset: 0,
+					EndingOffset:   0,
+					RiskScore:      2,
+					RiskLevel:      "MEDIUM",
 				},
 			},
-			expectedCount: 1,
-			expectedLines: [][]int{{10, 20, 30}},
 		},
 		{
-			name:     "Line info enabled - single line number",
+			name:     "Line info enabled - single line match",
 			lineInfo: true,
 			behaviors: []*malcontent.Behavior{
 				{
-					ID:          "test/single",
-					Description: "Single line behavior",
-					LineNumbers: []int{42},
-					RiskScore:   3,
-					RiskLevel:   "HIGH",
+					ID:             "test/single",
+					Description:    "Single line behavior",
+					StartingLine:   42,
+					EndingLine:     42,
+					StartingOffset: 10,
+					EndingOffset:   25,
+					RiskScore:      3,
+					RiskLevel:      "HIGH",
 				},
 			},
-			expectedCount: 1,
-			expectedLines: [][]int{{42}},
 		},
 		{
-			name:     "Line info enabled - multiple line numbers split",
+			name:     "Line info enabled - multi-line match",
 			lineInfo: true,
 			behaviors: []*malcontent.Behavior{
 				{
-					ID:           "net/http",
-					Description:  "HTTP connection",
-					LineNumbers:  []int{10, 25, 47},
-					MatchStrings: []string{"http://example.com"},
-					RiskScore:    2,
-					RiskLevel:    "MEDIUM",
+					ID:             "net/http",
+					Description:    "HTTP connection spanning lines",
+					StartingLine:   10,
+					EndingLine:     12,
+					StartingOffset: 15,
+					EndingOffset:   5,
+					MatchStrings:   []string{"http://example.com"},
+					RiskScore:      2,
+					RiskLevel:      "MEDIUM",
 				},
 			},
-			expectedCount: 3,
-			expectedLines: [][]int{{10}, {25}, {47}},
 		},
 		{
-			name:     "Line info enabled - mixed behaviors",
+			name:     "Line info enabled - multiple behaviors",
 			lineInfo: true,
 			behaviors: []*malcontent.Behavior{
 				{
-					ID:          "crypto/aes",
-					Description: "AES encryption",
-					LineNumbers: []int{5, 15},
-					RiskScore:   1,
-					RiskLevel:   "LOW",
+					ID:             "crypto/aes",
+					Description:    "AES encryption",
+					StartingLine:   5,
+					EndingLine:     5,
+					StartingOffset: 0,
+					EndingOffset:   20,
+					RiskScore:      1,
+					RiskLevel:      "LOW",
 				},
 				{
-					ID:          "net/socket",
-					Description: "Socket connection",
-					LineNumbers: []int{20},
-					RiskScore:   2,
-					RiskLevel:   "MEDIUM",
+					ID:             "net/socket",
+					Description:    "Socket connection",
+					StartingLine:   20,
+					EndingLine:     22,
+					StartingOffset: 5,
+					EndingOffset:   15,
+					RiskScore:      2,
+					RiskLevel:      "MEDIUM",
 				},
 				{
-					ID:          "exec/shell",
-					Description: "Shell execution",
-					LineNumbers: []int{30, 35, 40},
-					RiskScore:   3,
-					RiskLevel:   "HIGH",
+					ID:             "exec/shell",
+					Description:    "Shell execution",
+					StartingLine:   30,
+					EndingLine:     30,
+					StartingOffset: 0,
+					EndingOffset:   50,
+					RiskScore:      3,
+					RiskLevel:      "HIGH",
 				},
 			},
-			expectedCount: 6, // 2 + 1 + 3
-			expectedLines: [][]int{{5}, {15}, {20}, {30}, {35}, {40}},
-		},
-		{
-			name:     "Line info enabled - empty line numbers",
-			lineInfo: true,
-			behaviors: []*malcontent.Behavior{
-				{
-					ID:          "test/no-lines",
-					Description: "No line numbers",
-					LineNumbers: []int{},
-					RiskScore:   1,
-					RiskLevel:   "LOW",
-				},
-			},
-			expectedCount: 1,
-			expectedLines: [][]int{{}},
 		},
 	}
 
@@ -150,55 +143,51 @@ func TestJSONLineNumberSplitting(t *testing.T) {
 				t.Fatal("Expected file report not found in output")
 			}
 
-			// Verify behavior count
-			if len(fileReport.Behaviors) != tt.expectedCount {
-				t.Errorf("Expected %d behaviors, got %d", tt.expectedCount, len(fileReport.Behaviors))
+			// Verify behavior count matches input
+			if len(fileReport.Behaviors) != len(tt.behaviors) {
+				t.Errorf("Expected %d behaviors, got %d", len(tt.behaviors), len(fileReport.Behaviors))
 			}
 
-			// Verify line numbers
+			// Verify each behavior
 			for i, behavior := range fileReport.Behaviors {
-				if i < len(tt.expectedLines) {
-					if !equalIntSlices(behavior.LineNumbers, tt.expectedLines[i]) {
-						t.Errorf("Behavior %d: expected line numbers %v, got %v",
-							i, tt.expectedLines[i], behavior.LineNumbers)
-					}
+				if i >= len(tt.behaviors) {
+					break
 				}
-			}
+				expected := tt.behaviors[i]
 
-			// When line info is enabled and behaviors are split, verify that each
-			// behavior maintains the same properties except line numbers
-			if tt.lineInfo && len(tt.behaviors) > 0 && len(tt.behaviors[0].LineNumbers) > 1 {
-				firstOriginal := tt.behaviors[0]
-				for _, behavior := range fileReport.Behaviors {
-					if behavior.ID != firstOriginal.ID {
-						continue
+				// Check all fields match
+				if behavior.ID != expected.ID {
+					t.Errorf("Behavior %d: ID mismatch: expected %q, got %q", i, expected.ID, behavior.ID)
+				}
+				if behavior.Description != expected.Description {
+					t.Errorf("Behavior %d: Description mismatch: expected %q, got %q", i, expected.Description, behavior.Description)
+				}
+				if behavior.RiskScore != expected.RiskScore {
+					t.Errorf("Behavior %d: RiskScore mismatch: expected %d, got %d", i, expected.RiskScore, behavior.RiskScore)
+				}
+				if behavior.RiskLevel != expected.RiskLevel {
+					t.Errorf("Behavior %d: RiskLevel mismatch: expected %q, got %q", i, expected.RiskLevel, behavior.RiskLevel)
+				}
+
+				// Check line info fields
+				if tt.lineInfo {
+					if behavior.StartingLine != expected.StartingLine {
+						t.Errorf("Behavior %d: StartingLine mismatch: expected %d, got %d", i, expected.StartingLine, behavior.StartingLine)
 					}
-					if behavior.Description != firstOriginal.Description {
-						t.Errorf("Description mismatch: expected %q, got %q",
-							firstOriginal.Description, behavior.Description)
+					if behavior.EndingLine != expected.EndingLine {
+						t.Errorf("Behavior %d: EndingLine mismatch: expected %d, got %d", i, expected.EndingLine, behavior.EndingLine)
 					}
-					if behavior.RiskScore != firstOriginal.RiskScore {
-						t.Errorf("RiskScore mismatch: expected %d, got %d",
-							firstOriginal.RiskScore, behavior.RiskScore)
+					if behavior.StartingOffset != expected.StartingOffset {
+						t.Errorf("Behavior %d: StartingOffset mismatch: expected %d, got %d", i, expected.StartingOffset, behavior.StartingOffset)
 					}
-					if behavior.RiskLevel != firstOriginal.RiskLevel {
-						t.Errorf("RiskLevel mismatch: expected %q, got %q",
-							firstOriginal.RiskLevel, behavior.RiskLevel)
+					if behavior.EndingOffset != expected.EndingOffset {
+						t.Errorf("Behavior %d: EndingOffset mismatch: expected %d, got %d", i, expected.EndingOffset, behavior.EndingOffset)
 					}
+				} else if behavior.StartingLine != 0 || behavior.EndingLine != 0 || behavior.StartingOffset != 0 || behavior.EndingOffset != 0 {
+					// When line info is disabled, all line fields should be 0
+					t.Errorf("Behavior %d: Expected all line info fields to be 0 when line info is disabled", i)
 				}
 			}
 		})
 	}
-}
-
-func equalIntSlices(a, b []int) bool {
-	if len(a) != len(b) {
-		return false
-	}
-	for i := range a {
-		if a[i] != b[i] {
-			return false
-		}
-	}
-	return true
 }

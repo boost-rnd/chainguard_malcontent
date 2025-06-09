@@ -10,6 +10,9 @@
                     "MatchStrings": [
                         "umask"
                     ],
+                    "StartingLine": 23,
+                    "EndingLine": 23,
+                    "EndingOffset": 4,
                     "RiskScore": 0,
                     "RiskLevel": "NONE",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/file/file-permission-mask-set.yara#umask",
@@ -21,6 +24,10 @@
                     "MatchStrings": [
                         "/etc/profile.d/"
                     ],
+                    "StartingLine": 28,
+                    "EndingLine": 28,
+                    "StartingOffset": 14,
+                    "EndingOffset": 28,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/path/etc.yara#etc_path",
@@ -32,6 +39,10 @@
                     "MatchStrings": [
                         "/usr/local/bin"
                     ],
+                    "StartingLine": 14,
+                    "EndingLine": 14,
+                    "StartingOffset": 13,
+                    "EndingOffset": 26,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/path/usr-local.yara#usr_local_bin_path",
@@ -43,6 +54,10 @@
                     "MatchStrings": [
                         "/etc/profile"
                     ],
+                    "StartingLine": 28,
+                    "EndingLine": 28,
+                    "StartingOffset": 14,
+                    "EndingOffset": 25,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/persist/shell/bash.yara#bash_persist",
@@ -54,6 +69,10 @@
                     "MatchStrings": [
                         "/etc/profile"
                     ],
+                    "StartingLine": 28,
+                    "EndingLine": 28,
+                    "StartingOffset": 14,
+                    "EndingOffset": 25,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/persist/shell/init_files.yara#etc_shell_init_references",

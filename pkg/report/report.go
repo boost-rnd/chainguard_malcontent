@@ -478,7 +478,7 @@ func Generate(ctx context.Context, path string, mrs *yarax.ScanResults, c malcon
 				matches = append(matches, p.Matches()...)
 			}
 
-			processor := newMatchProcessor(fc, matches, m.Patterns(), c.LineInfo)
+			processor := newMatchProcessor(fc, matches, m.Patterns())
 			matchResult = processor.process()
 			matchedStrings = matchResult.Strings
 		}

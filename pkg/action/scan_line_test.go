@@ -41,11 +41,9 @@ openssl enc -aes-256-cbc
 		t.Fatalf("Failed to compile rules: %v", err)
 	}
 
-	// Test with line info enabled
 	configWithLineInfo := malcontent.Config{
 		Concurrency:      1,
 		IncludeDataFiles: true,
-		LineInfo:         true,
 		MinFileRisk:      0,
 		MinRisk:          0,
 		Rules:            compiledRules,
@@ -103,35 +101,6 @@ openssl enc -aes-256-cbc
 	if !foundLineNumbers {
 		t.Error("No line numbers found in behaviors with matches")
 	}
-
-	// Test with line info disabled
-	configWithoutLineInfo := malcontent.Config{
-		Concurrency:      1,
-		IncludeDataFiles: true,
-		LineInfo:         false,
-		MinFileRisk:      0,
-		MinRisk:          0,
-		Rules:            compiledRules,
-		ScanPaths:        []string{testFile},
-		Renderer:         render.NewSimple(os.Stdout),
-	}
-
-	frs2, err := recursiveScan(ctx, configWithoutLineInfo)
-	if err != nil {
-		t.Fatalf("Scan without line info failed: %v", err)
-	}
-
-	// Check that line numbers are NOT present when disabled
-	frs2.Files.Range(func(_, value any) bool {
-		if fr, ok := value.(*malcontent.FileReport); ok {
-			for _, behavior := range fr.Behaviors {
-				if behavior.StartingLine > 0 || behavior.EndingLine > 0 {
-					t.Error("Line numbers found when line info is disabled")
-				}
-			}
-		}
-		return true
-	})
 }
 
 func TestScanBinaryWithLineInfo(t *testing.T) {
@@ -166,7 +135,6 @@ func TestScanBinaryWithLineInfo(t *testing.T) {
 	config := malcontent.Config{
 		Concurrency:      1,
 		IncludeDataFiles: true,
-		LineInfo:         true,
 		MinFileRisk:      0,
 		MinRisk:          0,
 		Rules:            compiledRules,
@@ -225,7 +193,6 @@ openssl dgst -sha256 file.txt
 	config := malcontent.Config{
 		Concurrency:      1,
 		IncludeDataFiles: true,
-		LineInfo:         true,
 		MinFileRisk:      0,
 		MinRisk:          0,
 		Rules:            compiledRules,
@@ -268,33 +235,6 @@ openssl dgst -sha256 file.txt
 				if behavior.EndingOffset < 0 {
 					t.Errorf("Invalid ending offset %d for behavior %s", behavior.EndingOffset, behavior.ID)
 				}
-			}
-		}
-	}
-
-	// Test with line info disabled
-	jsonBuf.Reset()
-	config.LineInfo = false
-
-	report2, err := Scan(ctx, config)
-	if err != nil {
-		t.Fatalf("Scan without line info failed: %v", err)
-	}
-
-	if err := config.Renderer.Full(ctx, &config, report2); err != nil {
-		t.Fatalf("Failed to render JSON without line info: %v", err)
-	}
-
-	var output2 render.Report
-	if err := json.Unmarshal(jsonBuf.Bytes(), &output2); err != nil {
-		t.Fatalf("Failed to parse JSON output without line info: %v", err)
-	}
-
-	// Without line info, behaviors should not have line numbers
-	for _, fileReport := range output2.Files {
-		for _, behavior := range fileReport.Behaviors {
-			if behavior.StartingLine > 0 || behavior.EndingLine > 0 {
-				t.Errorf("Behavior %s has line info when it should be disabled", behavior.ID)
 			}
 		}
 	}

@@ -12,12 +12,10 @@ import (
 func TestJSONLineInfoOutput(t *testing.T) {
 	tests := []struct {
 		name      string
-		lineInfo  bool
 		behaviors []*malcontent.Behavior
 	}{
 		{
-			name:     "Line info disabled - no line numbers",
-			lineInfo: false,
+			name: "Line info disabled - no line numbers",
 			behaviors: []*malcontent.Behavior{
 				{
 					ID:             "test/behavior",
@@ -32,8 +30,7 @@ func TestJSONLineInfoOutput(t *testing.T) {
 			},
 		},
 		{
-			name:     "Line info enabled - single line match",
-			lineInfo: true,
+			name: "Line info single line match",
 			behaviors: []*malcontent.Behavior{
 				{
 					ID:             "test/single",
@@ -48,8 +45,7 @@ func TestJSONLineInfoOutput(t *testing.T) {
 			},
 		},
 		{
-			name:     "Line info enabled - multi-line match",
-			lineInfo: true,
+			name: "Line info enabled - multi-line match",
 			behaviors: []*malcontent.Behavior{
 				{
 					ID:             "net/http",
@@ -65,8 +61,7 @@ func TestJSONLineInfoOutput(t *testing.T) {
 			},
 		},
 		{
-			name:     "Line info enabled - multiple behaviors",
-			lineInfo: true,
+			name: "Line info enabled - multiple behaviors",
 			behaviors: []*malcontent.Behavior{
 				{
 					ID:             "crypto/aes",
@@ -118,9 +113,7 @@ func TestJSONLineInfoOutput(t *testing.T) {
 			report.Files.Store("test.sh", fr)
 
 			// Create config
-			config := &malcontent.Config{
-				LineInfo: tt.lineInfo,
-			}
+			config := &malcontent.Config{}
 
 			// Render to JSON
 			var buf bytes.Buffer
@@ -170,22 +163,17 @@ func TestJSONLineInfoOutput(t *testing.T) {
 				}
 
 				// Check line info fields
-				if tt.lineInfo {
-					if behavior.StartingLine != expected.StartingLine {
-						t.Errorf("Behavior %d: StartingLine mismatch: expected %d, got %d", i, expected.StartingLine, behavior.StartingLine)
-					}
-					if behavior.EndingLine != expected.EndingLine {
-						t.Errorf("Behavior %d: EndingLine mismatch: expected %d, got %d", i, expected.EndingLine, behavior.EndingLine)
-					}
-					if behavior.StartingOffset != expected.StartingOffset {
-						t.Errorf("Behavior %d: StartingOffset mismatch: expected %d, got %d", i, expected.StartingOffset, behavior.StartingOffset)
-					}
-					if behavior.EndingOffset != expected.EndingOffset {
-						t.Errorf("Behavior %d: EndingOffset mismatch: expected %d, got %d", i, expected.EndingOffset, behavior.EndingOffset)
-					}
-				} else if behavior.StartingLine != 0 || behavior.EndingLine != 0 || behavior.StartingOffset != 0 || behavior.EndingOffset != 0 {
-					// When line info is disabled, all line fields should be 0
-					t.Errorf("Behavior %d: Expected all line info fields to be 0 when line info is disabled", i)
+				if behavior.StartingLine != expected.StartingLine {
+					t.Errorf("Behavior %d: StartingLine mismatch: expected %d, got %d", i, expected.StartingLine, behavior.StartingLine)
+				}
+				if behavior.EndingLine != expected.EndingLine {
+					t.Errorf("Behavior %d: EndingLine mismatch: expected %d, got %d", i, expected.EndingLine, behavior.EndingLine)
+				}
+				if behavior.StartingOffset != expected.StartingOffset {
+					t.Errorf("Behavior %d: StartingOffset mismatch: expected %d, got %d", i, expected.StartingOffset, behavior.StartingOffset)
+				}
+				if behavior.EndingOffset != expected.EndingOffset {
+					t.Errorf("Behavior %d: EndingOffset mismatch: expected %d, got %d", i, expected.EndingOffset, behavior.EndingOffset)
 				}
 			}
 		})

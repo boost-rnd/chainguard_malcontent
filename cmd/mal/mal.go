@@ -270,7 +270,6 @@ func main() {
 				IgnoreSelf:            ignoreSelfFlag,
 				IgnoreTags:            ignoreTags,
 				IncludeDataFiles:      includeDataFiles,
-				LineInfo:              lineInfoFlag,
 				MinFileRisk:           minFileRisk,
 				MinRisk:               minRisk,
 				OCI:                   ociFlag,

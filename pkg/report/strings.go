@@ -59,17 +59,15 @@ type matchProcessor struct {
 	pool     *StringPool
 	matches  []yarax.Match
 	patterns []yarax.Pattern
-	lineInfo bool
 	mu       sync.Mutex
 }
 
-func newMatchProcessor(fc []byte, matches []yarax.Match, mp []yarax.Pattern, lineInfo bool) *matchProcessor {
+func newMatchProcessor(fc []byte, matches []yarax.Match, mp []yarax.Pattern) *matchProcessor {
 	return &matchProcessor{
 		fc:       fc,
 		pool:     NewStringPool(len(matches)),
 		matches:  matches,
 		patterns: mp,
-		lineInfo: lineInfo,
 	}
 }
 
@@ -134,9 +132,7 @@ func (mp *matchProcessor) process() *MatchResult {
 				*result = append(*result, mp.pool.Intern(string(matchBytes)))
 			}
 
-			if mp.lineInfo {
-				mp.updateLineInfo(o, l, &startingLine, &endingLine, &startingOffset, &endingOffset, &firstMatch)
-			}
+			mp.updateLineInfo(o, l, &startingLine, &endingLine, &startingOffset, &endingOffset, &firstMatch)
 		} else {
 			if patterns == nil || cap(patterns) < patternsCap {
 				patterns = make([]string, 0, patternsCap)
@@ -148,9 +144,7 @@ func (mp *matchProcessor) process() *MatchResult {
 			}
 			*result = append(*result, slices.Compact(patterns)...)
 
-			if mp.lineInfo {
-				mp.updateLineInfo(o, l, &startingLine, &endingLine, &startingOffset, &endingOffset, &firstMatch)
-			}
+			mp.updateLineInfo(o, l, &startingLine, &endingLine, &startingOffset, &endingOffset, &firstMatch)
 		}
 	}
 

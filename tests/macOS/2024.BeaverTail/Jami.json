@@ -22,6 +22,10 @@
                         "/.pyp/python.exe",
                         "%1_%2_%3_%4_%5"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 654,
+                    "EndingOffset": 1527,
                     "RiskScore": 4,
                     "RiskLevel": "CRITICAL",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/yara/JPCERT/lazarus.yara#Lazarus_jamistealer_str",
@@ -41,6 +45,10 @@
                         "ejbalbakoplchlghecdalmeeeajnimhm",
                         "aholpfdialjgjfhomihkjbmgjidlcdno"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 131,
+                    "EndingOffset": 525,
                     "RiskScore": 4,
                     "RiskLevel": "CRITICAL",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/yara/elastic/Macos_Infostealer_Wallets.yar#Macos_Infostealer_Wallets_8e469ea0",
@@ -54,6 +62,10 @@
                     "MatchStrings": [
                         "ft hg"
                     ],
+                    "StartingLine": 1168,
+                    "EndingLine": 1168,
+                    "StartingOffset": 546,
+                    "EndingOffset": 550,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/anti-static/binary/opaque.yara#opaque_binary",
@@ -73,6 +85,10 @@
                     "MatchStrings": [
                         "_PAGEZERO"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 41,
+                    "EndingOffset": 49,
                     "RiskScore": 3,
                     "RiskLevel": "HIGH",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/anti-static/macho/footer.yara#high_entropy_trailer",
@@ -85,6 +101,10 @@
                     "MatchStrings": [
                         "95.164.17.24"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 113,
+                    "EndingOffset": 124,
                     "RiskScore": 3,
                     "RiskLevel": "HIGH",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/addr/ip.yara#bin_hardcoded_ip",
@@ -96,6 +116,10 @@
                     "MatchStrings": [
                         "http://95.164.17.24"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 106,
+                    "EndingOffset": 124,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/addr/url.yara#binary_with_url",
@@ -108,6 +132,10 @@
                         "Keychains",
                         "logkc_db"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 920,
+                    "EndingOffset": 946,
                     "RiskScore": 4,
                     "RiskLevel": "CRITICAL",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/credential/keychain/keychain.yara#login_keychain_eager_beaver",
@@ -127,6 +155,10 @@
                         "Roaming/",
                         ".config"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 564,
+                    "EndingOffset": 888,
                     "RiskScore": 3,
                     "RiskLevel": "HIGH",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exfil/stealer/browser.yara#multiple_browser_refs",
@@ -150,6 +182,10 @@
                         "ebolmdjonilk",
                         "http"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 106,
+                    "EndingOffset": 522,
                     "RiskScore": 4,
                     "RiskLevel": "CRITICAL",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exfil/stealer/wallet.yara#crypto_extension_stealer",
@@ -163,6 +199,10 @@
                         "/.config/google",
                         "/.config/opera"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 588,
+                    "EndingOffset": 859,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/path/home-config.yara#home_config_path",
@@ -186,6 +226,10 @@
                         "/pdown",
                         "*.ldb"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 3614,
+                    "StartingOffset": 920,
+                    "EndingOffset": 604,
                     "RiskScore": 4,
                     "RiskLevel": "CRITICAL",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/malware/family/beaver_tail.yara#beaver_tail",
@@ -199,6 +243,10 @@
                         "Download Python Success",
                         "Download Client Success"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 1438,
+                    "EndingOffset": 1526,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/download/download.yara#download",
@@ -210,6 +258,10 @@
                     "MatchStrings": [
                         "http"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 106,
+                    "EndingOffset": 109,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/http.yara#http",
@@ -221,6 +273,10 @@
                     "MatchStrings": [
                         "multipart/form-data; boundary="
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 1318,
+                    "EndingOffset": 1347,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/post.yara#form_data_reference",
@@ -232,6 +288,10 @@
                     "MatchStrings": [
                         "http://95.164.17.24"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 106,
+                    "EndingOffset": 124,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/url/embedded.yara#http_url",
@@ -243,6 +303,10 @@
                     "MatchStrings": [
                         "Upload LDB Finshed!!!"
                     ],
+                    "StartingLine": 263,
+                    "EndingLine": 263,
+                    "StartingOffset": 1387,
+                    "EndingOffset": 1407,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/sus/exclamation.yara#exclamations",

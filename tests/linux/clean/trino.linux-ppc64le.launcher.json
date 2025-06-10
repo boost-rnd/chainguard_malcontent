@@ -51,6 +51,10 @@
                         "GetRandom",
                         "getRandom"
                     ],
+                    "StartingLine": 2681,
+                    "EndingLine": 13044,
+                    "StartingOffset": 7,
+                    "EndingOffset": 437,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/anti-behavior/random_behavior.yara#random",
@@ -65,6 +69,10 @@
                         "lIp",
                         "IP"
                     ],
+                    "StartingLine": 2669,
+                    "EndingLine": 12447,
+                    "StartingOffset": 35804,
+                    "EndingOffset": 70,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/addr/ip.yara#ip_port_mention",
@@ -76,6 +84,10 @@
                     "MatchStrings": [
                         "http://AvestanBengaliBrailleCypriotDeseretElbasanElymaicGranthaHanunooKannadaMakasarMandaicMarchenMultaniMyanmarOsmanyaSharadaShavianSiddhamSinhalaSogdianSoyomboTagalogTibetanTirhutanil"
                     ],
+                    "StartingLine": 3546,
+                    "EndingLine": 3546,
+                    "StartingOffset": 224,
+                    "EndingOffset": 408,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/addr/url.yara#binary_with_url",
@@ -89,6 +101,10 @@
                         "amd64",
                         "arm64"
                     ],
+                    "StartingLine": 3546,
+                    "EndingLine": 5345,
+                    "StartingOffset": 224,
+                    "EndingOffset": 51141,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/tool_transfer/arch.yara#arch_ref",
@@ -102,6 +118,10 @@
                         "darwin",
                         "linux"
                     ],
+                    "StartingLine": 3540,
+                    "EndingLine": 13034,
+                    "StartingOffset": 54,
+                    "EndingOffset": 15,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/tool_transfer/os.yara#multiple_os_ref",
@@ -113,6 +133,10 @@
                     "MatchStrings": [
                         "archive/zip"
                     ],
+                    "StartingLine": 3553,
+                    "EndingLine": 3553,
+                    "StartingOffset": 1001,
+                    "EndingOffset": 1011,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/collect/archives/zip.yara#zip",
@@ -125,6 +149,10 @@
                         "UserPassword",
                         "passwordSet"
                     ],
+                    "StartingLine": 2681,
+                    "EndingLine": 5342,
+                    "StartingOffset": 4957,
+                    "EndingOffset": 119863,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/credential/password/password.yara#password",
@@ -136,6 +164,9 @@
                     "MatchStrings": [
                         "privateKey"
                     ],
+                    "StartingLine": 2917,
+                    "EndingLine": 2936,
+                    "EndingOffset": 11728,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/credential/ssl/private_key.yara#private_key_val",
@@ -147,6 +178,10 @@
                     "MatchStrings": [
                         "crypto/aes"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5345,
+                    "StartingOffset": 90636,
+                    "EndingOffset": 29431,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/crypto/aes.yara#crypto_aes",
@@ -158,6 +193,10 @@
                     "MatchStrings": [
                         "crypto/ecdsa"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5345,
+                    "StartingOffset": 94793,
+                    "EndingOffset": 31731,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/crypto/ecdsa.yara#crypto_ecdsa",
@@ -170,6 +209,10 @@
                         "PublicKey",
                         "publicKey"
                     ],
+                    "StartingLine": 2681,
+                    "EndingLine": 2948,
+                    "StartingOffset": 7971,
+                    "EndingOffset": 496,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/crypto/public_key.yara#public_key",
@@ -181,6 +224,9 @@
                     "MatchStrings": [
                         "crypto/tls"
                     ],
+                    "StartingLine": 2879,
+                    "EndingLine": 5345,
+                    "EndingOffset": 41813,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/crypto/tls.yara#tls",
@@ -192,6 +238,10 @@
                     "MatchStrings": [
                         "gzip"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5345,
+                    "StartingOffset": 124587,
+                    "EndingOffset": 43421,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/data/compression/gzip.yara#gzip",
@@ -204,6 +254,10 @@
                     "MatchStrings": [
                         "base64"
                     ],
+                    "StartingLine": 2936,
+                    "EndingLine": 5345,
+                    "StartingOffset": 2264,
+                    "EndingOffset": 32701,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/data/encoding/base64.yara#b64",
@@ -215,6 +269,10 @@
                     "MatchStrings": [
                         "nproc"
                     ],
+                    "StartingLine": 3556,
+                    "EndingLine": 3577,
+                    "StartingOffset": 266,
+                    "EndingOffset": 2888,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/discover/system/cpu.yara#processor_count",
@@ -227,6 +285,10 @@
                     "MatchStrings": [
                         "/proc/sys/kernel/hostname"
                     ],
+                    "StartingLine": 3577,
+                    "EndingLine": 3577,
+                    "StartingOffset": 25,
+                    "EndingOffset": 49,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/discover/system/hostname.yara#gethostname",
@@ -239,6 +301,10 @@
                     "MatchStrings": [
                         "syscall.Uname"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 71800,
+                    "EndingOffset": 71812,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/discover/system/platform.yara#uname",
@@ -252,6 +318,10 @@
                         "CombinedOutput",
                         "exec"
                     ],
+                    "StartingLine": 2681,
+                    "EndingLine": 5345,
+                    "StartingOffset": 1816,
+                    "EndingOffset": 51153,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exec/cmd/pipe.yara#popen_go",
@@ -266,6 +336,9 @@
                         "pluginversion",
                         "pluginpath"
                     ],
+                    "StartingLine": 2790,
+                    "EndingLine": 3600,
+                    "EndingOffset": 666,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exec/plugin/plugin.yara#plugin",
@@ -278,6 +351,10 @@
                         ").CombinedOutput",
                         "exec.(*Cmd).Run"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 141723,
+                    "EndingOffset": 142243,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exec/program/program.yara#exec_cmd_run",
@@ -289,6 +366,10 @@
                     "MatchStrings": [
                         "mkdir"
                     ],
+                    "StartingLine": 3540,
+                    "EndingLine": 3540,
+                    "StartingOffset": 89,
+                    "EndingOffset": 93,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/directory/directory-create.yara#mkdir",
@@ -301,6 +382,10 @@
                     "MatchStrings": [
                         "Rmdir"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 80683,
+                    "EndingOffset": 80687,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/directory/directory-remove.yara#rmdir",
@@ -312,6 +397,10 @@
                     "MatchStrings": [
                         "cp"
                     ],
+                    "StartingLine": 317,
+                    "EndingLine": 2159,
+                    "StartingOffset": 321,
+                    "EndingOffset": 43,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/file/file-copy.yara#file_copy_cp",
@@ -323,6 +412,10 @@
                     "MatchStrings": [
                         "unlinkat"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 71650,
+                    "EndingOffset": 71657,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/file/file-delete.yara#unlink",
@@ -335,6 +428,10 @@
                     "MatchStrings": [
                         "openFile"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 80419,
+                    "EndingOffset": 80443,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/file/file-open.yara#java_open",
@@ -347,6 +444,10 @@
                         "os.(*File).Read",
                         "ReadFile"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 79684,
+                    "EndingOffset": 143731,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/file/file-read.yara#go_file_read",
@@ -358,6 +459,10 @@
                     "MatchStrings": [
                         "readlinkat"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 71613,
+                    "EndingOffset": 80743,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/link-read.yara#readlink",
@@ -370,6 +475,10 @@
                     "MatchStrings": [
                         "flock"
                     ],
+                    "StartingLine": 2934,
+                    "EndingLine": 13026,
+                    "StartingOffset": 3919,
+                    "EndingOffset": 31,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/lock-update.yara#flock",
@@ -389,6 +498,10 @@
                         "/etc/mime.types",
                         "/etc/zoneinfo"
                     ],
+                    "StartingLine": 3552,
+                    "EndingLine": 3577,
+                    "StartingOffset": 470,
+                    "EndingOffset": 2221,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/path/etc.yara#etc_path",
@@ -400,6 +513,10 @@
                     "MatchStrings": [
                         "/etc/hosts"
                     ],
+                    "StartingLine": 3552,
+                    "EndingLine": 3552,
+                    "StartingOffset": 470,
+                    "EndingOffset": 479,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/path/etc-hosts.yara#etc_hosts",
@@ -411,6 +528,10 @@
                     "MatchStrings": [
                         "/etc/resolv.conf"
                     ],
+                    "StartingLine": 3565,
+                    "EndingLine": 3565,
+                    "StartingOffset": 224,
+                    "EndingOffset": 239,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/path/etc-resolv.conf.yara#etc_resolv_conf",
@@ -439,6 +560,10 @@
                         "/Users/martin/go/pkg/mod/golang.org/x/text",
                         "/Users/martin/go/pkg/mod/golang.org/x/sys"
                     ],
+                    "StartingLine": 5086,
+                    "EndingLine": 5345,
+                    "StartingOffset": 220,
+                    "EndingOffset": 51112,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/path/users.yara#home_path_users",
@@ -452,6 +577,10 @@
                         "/var/log/launcher.log",
                         "/var/log/server.log"
                     ],
+                    "StartingLine": 3587,
+                    "EndingLine": 3599,
+                    "StartingOffset": 3012,
+                    "EndingOffset": 412,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/path/var.yara#var_path",
@@ -463,6 +592,10 @@
                     "MatchStrings": [
                         "Chown"
                     ],
+                    "StartingLine": 2669,
+                    "EndingLine": 2669,
+                    "StartingOffset": 38253,
+                    "EndingOffset": 38257,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/permission/permission-chown.yara#Chown",
@@ -475,6 +608,10 @@
                         "chmod",
                         "Chmod"
                     ],
+                    "StartingLine": 2669,
+                    "EndingLine": 2669,
+                    "StartingOffset": 38246,
+                    "EndingOffset": 38271,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/permission/permission-modify.yara#chmod",
@@ -489,6 +626,10 @@
                         "dnsmessage",
                         "SetEDNS0"
                     ],
+                    "StartingLine": 2934,
+                    "EndingLine": 5345,
+                    "StartingOffset": 7405,
+                    "EndingOffset": 34023,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/dns/dns.yara#go_dns_refs",
@@ -500,6 +641,10 @@
                     "MatchStrings": [
                         "CNAMEResource"
                     ],
+                    "StartingLine": 2934,
+                    "EndingLine": 5342,
+                    "StartingOffset": 7405,
+                    "EndingOffset": 107250,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/dns/dns-servers.yara#go_dns_refs_local",
@@ -512,6 +657,10 @@
                         "dns",
                         "TXT"
                     ],
+                    "StartingLine": 2681,
+                    "EndingLine": 5345,
+                    "StartingOffset": 8153,
+                    "EndingOffset": 35929,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/dns/dns-txt.yara#dns_txt",
@@ -524,6 +673,10 @@
                         "http",
                         "HTTP"
                     ],
+                    "StartingLine": 2681,
+                    "EndingLine": 5345,
+                    "StartingOffset": 4921,
+                    "EndingOffset": 47480,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/http.yara#http",
@@ -535,6 +688,10 @@
                     "MatchStrings": [
                         "www-authenticate"
                     ],
+                    "StartingLine": 3565,
+                    "EndingLine": 3565,
+                    "StartingOffset": 64,
+                    "EndingOffset": 79,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/auth.yara#http_auth",
@@ -548,6 +705,10 @@
                         "HTTP",
                         "http"
                     ],
+                    "StartingLine": 2681,
+                    "EndingLine": 5345,
+                    "StartingOffset": 4921,
+                    "EndingOffset": 47480,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/post.yara#http_post",
@@ -560,6 +721,10 @@
                         "HTTPS_PROXY",
                         "HTTP_PROXY"
                     ],
+                    "StartingLine": 3552,
+                    "EndingLine": 3601,
+                    "StartingOffset": 530,
+                    "EndingOffset": 25,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/proxy.yara#http_proxy_env",
@@ -572,6 +737,10 @@
                     "MatchStrings": [
                         "User-Agent"
                     ],
+                    "StartingLine": 3552,
+                    "EndingLine": 3552,
+                    "StartingOffset": 150,
+                    "EndingOffset": 159,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/http-request.yara#http_request",
@@ -583,6 +752,10 @@
                     "MatchStrings": [
                         "ipAddr"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 113325,
+                    "EndingOffset": 113330,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/ip/addr.yara#ip_addr",
@@ -594,6 +767,10 @@
                     "MatchStrings": [
                         "hostunknown port"
                     ],
+                    "StartingLine": 3555,
+                    "EndingLine": 3555,
+                    "StartingOffset": 296,
+                    "EndingOffset": 311,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/ip/host_port.yara#host_port_ref",
@@ -605,6 +782,10 @@
                     "MatchStrings": [
                         "IsLinkLocalUnicast"
                     ],
+                    "StartingLine": 2936,
+                    "EndingLine": 5342,
+                    "StartingOffset": 7658,
+                    "EndingOffset": 98929,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/ip/ip-parse.yara#ip_go",
@@ -616,6 +797,10 @@
                     "MatchStrings": [
                         "LookupIP"
                     ],
+                    "StartingLine": 2681,
+                    "EndingLine": 5342,
+                    "StartingOffset": 5387,
+                    "EndingOffset": 117023,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/ip/ip-resolve.yara#gethostbyaddr",
@@ -628,6 +813,9 @@
                     "MatchStrings": [
                         "LookupHost"
                     ],
+                    "StartingLine": 2902,
+                    "EndingLine": 2902,
+                    "EndingOffset": 9,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/resolve/hostname-resolve.yara#go_resolve",
@@ -640,6 +828,10 @@
                         "socket",
                         "accept"
                     ],
+                    "StartingLine": 2669,
+                    "EndingLine": 5342,
+                    "StartingOffset": 39632,
+                    "EndingOffset": 115502,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/socket/socket-listen.yara#listen",
@@ -651,6 +843,10 @@
                     "MatchStrings": [
                         "getsockname"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 72120,
+                    "EndingOffset": 72130,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/socket/socket-local_addr.yara#getsockname",
@@ -663,6 +859,10 @@
                     "MatchStrings": [
                         "SetsockoptInt"
                     ],
+                    "StartingLine": 2934,
+                    "EndingLine": 5342,
+                    "StartingOffset": 6565,
+                    "EndingOffset": 77801,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/socket/socket-options-set.yara#go_setsockopt_int",
@@ -674,6 +874,10 @@
                     "MatchStrings": [
                         "getpeername"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 72100,
+                    "EndingOffset": 72110,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/socket/socket-peer-address.yara#getpeername",
@@ -686,6 +890,10 @@
                     "MatchStrings": [
                         "recvfrom"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 72140,
+                    "EndingOffset": 72147,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/socket/socket-receive.yara#recvmsg",
@@ -698,6 +906,10 @@
                     "MatchStrings": [
                         "sendto"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5342,
+                    "StartingOffset": 72157,
+                    "EndingOffset": 72162,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/socket/socket-send.yara#sendmsg",
@@ -710,6 +922,10 @@
                     "MatchStrings": [
                         "dialTCP"
                     ],
+                    "StartingLine": 2681,
+                    "EndingLine": 5342,
+                    "StartingOffset": 2929,
+                    "EndingOffset": 116083,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/tcp/connect.yara#connect_tcp",
@@ -721,6 +937,10 @@
                     "MatchStrings": [
                         "ReadFromUDP"
                     ],
+                    "StartingLine": 2934,
+                    "EndingLine": 2936,
+                    "StartingOffset": 2248,
+                    "EndingOffset": 9138,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/udp/udp-receive.yara#udp_listen",
@@ -733,6 +953,10 @@
                         "WriteMsgUDP",
                         "DialUDP"
                     ],
+                    "StartingLine": 2934,
+                    "EndingLine": 5342,
+                    "StartingOffset": 2261,
+                    "EndingOffset": 116439,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/udp/udp-send.yara#udp_send",
@@ -744,6 +968,10 @@
                     "MatchStrings": [
                         "http://AvestanBengaliBrailleCypriotDeseretElbasanElymaicGranthaHanunooKa"
                     ],
+                    "StartingLine": 3546,
+                    "EndingLine": 3546,
+                    "StartingOffset": 224,
+                    "EndingOffset": 295,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/url/embedded.yara#http_url",
@@ -755,6 +983,9 @@
                     "MatchStrings": [
                         "RequestURI"
                     ],
+                    "StartingLine": 2858,
+                    "EndingLine": 2858,
+                    "EndingOffset": 9,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/url/parse.yara#url_handle",
@@ -766,6 +997,10 @@
                     "MatchStrings": [
                         "net/url"
                     ],
+                    "StartingLine": 2681,
+                    "EndingLine": 5345,
+                    "StartingOffset": 2803,
+                    "EndingOffset": 38987,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/url/request.yara#requests_urls",
@@ -778,6 +1013,10 @@
                         "syscall.Sendfile",
                         "sendfile"
                     ],
+                    "StartingLine": 5342,
+                    "EndingLine": 5345,
+                    "StartingOffset": 71975,
+                    "EndingOffset": 37593,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/os/fd/sendfile.yara#sendfile",
@@ -790,6 +1029,10 @@
                     "MatchStrings": [
                         "netlink"
                     ],
+                    "StartingLine": 5345,
+                    "EndingLine": 5345,
+                    "StartingOffset": 19728,
+                    "EndingOffset": 19734,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/os/kernel/netlink.yara#netlink",
@@ -801,6 +1044,10 @@
                     "MatchStrings": [
                         "daemon"
                     ],
+                    "StartingLine": 3597,
+                    "EndingLine": 3599,
+                    "StartingOffset": 526,
+                    "EndingOffset": 428,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/persist/daemon/daemon.yara#daemon",
@@ -815,6 +1062,10 @@
                         "LockablePidFile",
                         "pidFile"
                     ],
+                    "StartingLine": 2681,
+                    "EndingLine": 5342,
+                    "StartingOffset": 931,
+                    "EndingOffset": 144789,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/persist/pid_file.yara#pid_file",
@@ -826,6 +1077,10 @@
                     "MatchStrings": [
                         "setgroups"
                     ],
+                    "StartingLine": 3570,
+                    "EndingLine": 3570,
+                    "StartingOffset": 824,
+                    "EndingOffset": 832,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/process/groups-set.yara#setgroups",
@@ -849,6 +1104,10 @@
                     "MatchStrings": [
                         "urandom"
                     ],
+                    "StartingLine": 7897,
+                    "EndingLine": 7897,
+                    "StartingOffset": 220,
+                    "EndingOffset": 226,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/anti-behavior/random_behavior.yara#random",
@@ -862,6 +1121,10 @@
                         "executable packer",
                         "UPX!"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 8750,
+                    "StartingOffset": 236,
+                    "EndingOffset": 120,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/anti-static/packer/upx.yara#upx",
@@ -874,6 +1137,10 @@
                         "dns",
                         "TXT"
                     ],
+                    "StartingLine": 2715,
+                    "EndingLine": 3116,
+                    "StartingOffset": 147,
+                    "EndingOffset": 82,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/dns/dns-txt.yara#dns_txt",
@@ -886,6 +1153,10 @@
                         "http",
                         "HTTP"
                     ],
+                    "StartingLine": 2715,
+                    "EndingLine": 8744,
+                    "StartingOffset": 200,
+                    "EndingOffset": 62,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/http.yara#http",
@@ -899,6 +1170,10 @@
                         "HTTP",
                         "http"
                     ],
+                    "StartingLine": 2715,
+                    "EndingLine": 8744,
+                    "StartingOffset": 200,
+                    "EndingOffset": 62,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/post.yara#http_post",
@@ -910,6 +1185,10 @@
                     "MatchStrings": [
                         "http://upx.sf.net"
                     ],
+                    "StartingLine": 8744,
+                    "EndingLine": 8744,
+                    "StartingOffset": 59,
+                    "EndingOffset": 75,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/url/embedded.yara#http_url",
@@ -930,6 +1209,10 @@
                         "kUNKNOWN:$",
                         "lmRnTEOIt"
                     ],
+                    "StartingLine": 2652,
+                    "EndingLine": 8691,
+                    "StartingOffset": 306,
+                    "EndingOffset": 284,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/false_positives/trino_upx.yara#trino_upx_override",
@@ -952,6 +1235,10 @@
                         "kUNKNOWN:$",
                         "lmRnTEOIt"
                     ],
+                    "StartingLine": 2652,
+                    "EndingLine": 8691,
+                    "StartingOffset": 306,
+                    "EndingOffset": 284,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/false_positives/trino_upx.yara#trino_upx_override",
@@ -974,6 +1261,10 @@
                         "kUNKNOWN:$",
                         "lmRnTEOIt"
                     ],
+                    "StartingLine": 2652,
+                    "EndingLine": 8691,
+                    "StartingOffset": 306,
+                    "EndingOffset": 284,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/false_positives/trino_upx.yara#trino_upx_override",
@@ -996,6 +1287,10 @@
                         "kUNKNOWN:$",
                         "lmRnTEOIt"
                     ],
+                    "StartingLine": 2652,
+                    "EndingLine": 8691,
+                    "StartingOffset": 306,
+                    "EndingOffset": 284,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/false_positives/trino_upx.yara#trino_upx_override",

@@ -17,6 +17,9 @@
                     "MatchStrings": [
                         "$elf_head"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 38,
+                    "EndingOffset": 158,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/anti-static/elf/multiple.yara#multiple_elf",
@@ -28,6 +31,10 @@
                     "MatchStrings": [
                         "https://wiki.musl"
                     ],
+                    "StartingLine": 36,
+                    "EndingLine": 36,
+                    "StartingOffset": 443,
+                    "EndingOffset": 459,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/addr/url.yara#binary_with_url",
@@ -40,6 +47,10 @@
                         "https://",
                         "x86_64"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 36,
+                    "StartingOffset": 808,
+                    "EndingOffset": 1047,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/tool_transfer/arch.yara#arch_ref",
@@ -52,6 +63,10 @@
                         "https://",
                         "linux"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 36,
+                    "StartingOffset": 802,
+                    "EndingOffset": 450,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/tool_transfer/os.yara#os_ref",
@@ -67,6 +82,10 @@
                         "/proc",
                         "maps"
                     ],
+                    "StartingLine": 25,
+                    "EndingLine": 38,
+                    "StartingOffset": 747,
+                    "EndingOffset": 44,
                     "RiskScore": 3,
                     "RiskLevel": "HIGH",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/evasion/process_injection/process-inject.yara#library_injector",
@@ -80,6 +99,10 @@
                         "process",
                         "ptrace"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 42,
+                    "StartingOffset": 2605,
+                    "EndingOffset": 2345,
                     "RiskScore": 3,
                     "RiskLevel": "HIGH",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/evasion/process_injection/ptrace.yara#ptrace_injector_unknown",
@@ -91,6 +114,10 @@
                     "MatchStrings": [
                         "dlsym"
                     ],
+                    "StartingLine": 36,
+                    "EndingLine": 36,
+                    "StartingOffset": 1348,
+                    "EndingOffset": 1358,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exec/dylib/symbol-address.yara#dlsym",
@@ -103,6 +130,10 @@
                     "MatchStrings": [
                         "waitpid"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 42,
+                    "StartingOffset": 2763,
+                    "EndingOffset": 2403,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exec/program/program-background.yara#waitpid",
@@ -115,6 +146,10 @@
                     "MatchStrings": [
                         "readlink"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 42,
+                    "StartingOffset": 2612,
+                    "EndingOffset": 1424,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/link-read.yara#readlink",
@@ -129,6 +164,10 @@
                         "/proc/%d/root",
                         "/proc/%s/exe"
                     ],
+                    "StartingLine": 26,
+                    "EndingLine": 38,
+                    "StartingOffset": 1,
+                    "EndingOffset": 52,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/proc/arbitrary-pid.yara#proc_arbitrary",
@@ -140,6 +179,10 @@
                     "MatchStrings": [
                         "/proc/%d/maps"
                     ],
+                    "StartingLine": 36,
+                    "EndingLine": 36,
+                    "StartingOffset": 1639,
+                    "EndingOffset": 1651,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/proc/pid-maps.yara#proc_maps",
@@ -151,6 +194,10 @@
                     "MatchStrings": [
                         "realpath"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 42,
+                    "StartingOffset": 2537,
+                    "EndingOffset": 2027,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/symlink-resolve.yara#realpath",
@@ -165,6 +212,10 @@
                         "address",
                         "offset"
                     ],
+                    "StartingLine": 36,
+                    "EndingLine": 42,
+                    "StartingOffset": 777,
+                    "EndingOffset": 2663,
                     "RiskScore": 3,
                     "RiskLevel": "HIGH",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/impact/exploit/overflow-shellcode.yara#exploit",
@@ -180,6 +231,10 @@
                         "remote_vcall",
                         "arch2name"
                     ],
+                    "StartingLine": 36,
+                    "EndingLine": 42,
+                    "StartingOffset": 204,
+                    "EndingOffset": 2796,
                     "RiskScore": 4,
                     "RiskLevel": "CRITICAL",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/malware/family/kubo_injector.yara#kubo",
@@ -192,6 +247,10 @@
                     "MatchStrings": [
                         "https://wiki.musl-libc.org/functional-differences-from-glibc.html"
                     ],
+                    "StartingLine": 36,
+                    "EndingLine": 36,
+                    "StartingOffset": 443,
+                    "EndingOffset": 507,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/url/embedded.yara#https_url",
@@ -203,6 +262,10 @@
                     "MatchStrings": [
                         "seccomp"
                     ],
+                    "StartingLine": 36,
+                    "EndingLine": 36,
+                    "StartingOffset": 808,
+                    "EndingOffset": 814,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/os/kernel/seccomp.yara#seccomp",

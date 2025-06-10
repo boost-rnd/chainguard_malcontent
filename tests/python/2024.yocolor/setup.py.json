@@ -19,6 +19,10 @@
                         "https://",
                         "windows"
                     ],
+                    "StartingLine": 43,
+                    "EndingLine": 51,
+                    "StartingOffset": 46,
+                    "EndingOffset": 29,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/tool_transfer/os.yara#os_ref",
@@ -30,6 +34,10 @@
                     "MatchStrings": [
                         "fernet"
                     ],
+                    "StartingLine": 16,
+                    "EndingLine": 18,
+                    "StartingOffset": 11,
+                    "EndingOffset": 59,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/crypto/fernet.yara#crypto_fernet",
@@ -47,6 +55,10 @@
                         "import os",
                         "import re"
                     ],
+                    "StartingLine": 4,
+                    "EndingLine": 16,
+                    "StartingOffset": 16,
+                    "EndingOffset": 16,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exec/imports/python.yara#has_import",
@@ -58,6 +70,10 @@
                     "MatchStrings": [
                         "pip install fernet"
                     ],
+                    "StartingLine": 18,
+                    "EndingLine": 18,
+                    "StartingOffset": 42,
+                    "EndingOffset": 59,
                     "RiskScore": 4,
                     "RiskLevel": "CRITICAL",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exec/install_additional/pip_install.yara#pip_installer_fernet",
@@ -70,6 +86,10 @@
                     "MatchStrings": [
                         "os.system(f'start {sys.executable} -m pip install fernet')"
                     ],
+                    "StartingLine": 18,
+                    "EndingLine": 18,
+                    "StartingOffset": 4,
+                    "EndingOffset": 61,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exec/program/program.yara#py_subprocess",
@@ -82,6 +102,10 @@
                     "MatchStrings": [
                         "open("
                     ],
+                    "StartingLine": 24,
+                    "EndingLine": 24,
+                    "StartingOffset": 8,
+                    "EndingOffset": 13,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/file/file-open.yara#py_open",
@@ -93,6 +117,10 @@
                     "MatchStrings": [
                         "/usr/bin/env"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 2,
+                    "EndingOffset": 13,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/path/usr-bin.yara#usr_bin_path",
@@ -104,6 +132,10 @@
                     "MatchStrings": [
                         "os.system(f'start {sys.executable} -m pip install fernet')"
                     ],
+                    "StartingLine": 18,
+                    "EndingLine": 18,
+                    "StartingOffset": 4,
+                    "EndingOffset": 61,
                     "RiskScore": 4,
                     "RiskLevel": "CRITICAL",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/impact/remote_access/py_setuptools.yara#setuptools_cmd_exec_start",
@@ -116,6 +148,10 @@
                         "https://github.com/tartley/yocolor",
                         "https://pypi.org/pypi?"
                     ],
+                    "StartingLine": 47,
+                    "EndingLine": 51,
+                    "StartingOffset": 9,
+                    "EndingOffset": 43,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/url/embedded.yara#https_url",
@@ -127,6 +163,10 @@
                     "MatchStrings": [
                         "fp.read()"
                     ],
+                    "StartingLine": 25,
+                    "EndingLine": 25,
+                    "StartingOffset": 15,
+                    "EndingOffset": 23,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/os/fd/read.yara#py_fd_read",
@@ -138,6 +178,10 @@
                     "MatchStrings": [
                         "sys.executable"
                     ],
+                    "StartingLine": 18,
+                    "EndingLine": 18,
+                    "StartingOffset": 23,
+                    "EndingOffset": 36,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/process/executable_path.yara#python_sys_executable",

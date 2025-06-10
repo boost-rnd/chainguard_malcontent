@@ -58,13 +58,13 @@ func TestCalculateLineNumber(t *testing.T) {
 			name:     "offset beyond content",
 			content:  "hello",
 			offset:   100,
-			expected: 0,
+			expected: 1,
 		},
 		{
 			name:     "negative offset",
 			content:  "hello",
 			offset:   -1,
-			expected: 0,
+			expected: 1,
 		},
 		{
 			name:     "windows line endings",
@@ -76,9 +76,12 @@ func TestCalculateLineNumber(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := calculateLineNumber([]byte(tt.content), tt.offset)
-			if got != tt.expected {
-				t.Errorf("calculateLineNumber() = %v, want %v", got, tt.expected)
+			content := []byte(tt.content)
+			mp := &matchProcessor{fc: content, lineOffsets: computeLineOffsets(content)}
+
+			line, _ := mp.getLineInfo(tt.offset)
+			if line != tt.expected {
+				t.Errorf("getLineInfo(%d).line = %d, want %d", tt.offset, line, tt.expected)
 			}
 		})
 	}
@@ -94,20 +97,19 @@ func TestCalculateLineNumber(t *testing.T) {
 // For now, we focus on testing the calculateLineNumber function which doesn't depend on yara-x types.
 
 func BenchmarkCalculateLineNumber(b *testing.B) {
-	// Create a large file with many lines
 	lines := make([]string, 10000)
 	for i := range lines {
 		lines[i] = "This is a test line with some content"
 	}
 	content := []byte(strings.Join(lines, "\n"))
-
-	// Test various offsets
 	offsets := []int{100, 1000, 10000, 50000, 100000}
 
+	mp := &matchProcessor{fc: content, lineOffsets: computeLineOffsets(content)}
+
 	b.ResetTimer()
-	for b.Loop() {
-		for _, offset := range offsets {
-			_ = calculateLineNumber(content, offset)
+	for i := 0; i < b.N; i++ {
+		for _, off := range offsets {
+			_, _ = mp.getLineInfo(off)
 		}
 	}
 }

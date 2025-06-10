@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestCalculateCharOffset(t *testing.T) {
+func TestGetLineInfo_CharOnly(t *testing.T) {
 	tests := []struct {
 		name     string
 		content  string
@@ -69,9 +69,15 @@ func TestCalculateCharOffset(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := calculateCharOffset([]byte(tt.content), tt.offset)
-			if result != tt.expected {
-				t.Errorf("calculateCharOffset() = %v, want %v", result, tt.expected)
+			content := []byte(tt.content)
+			mp := &matchProcessor{
+				lineOffsets: computeLineOffsets(content),
+				fc:          content,
+			}
+
+			_, char := mp.getLineInfo(tt.offset)
+			if char != tt.expected {
+				t.Errorf("getLineInfo(%d).char = %d, want %d", tt.offset, char, tt.expected)
 			}
 		})
 	}
@@ -118,15 +124,18 @@ func TestCalculateLineNumberWithOffset(t *testing.T) {
 			name:     "out of bounds",
 			content:  "hello",
 			offset:   10,
-			expected: 0,
+			expected: 1,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := calculateLineNumber([]byte(tt.content), tt.offset)
-			if result != tt.expected {
-				t.Errorf("calculateLineNumber() = %v, want %v", result, tt.expected)
+			content := []byte(tt.content)
+			mp := &matchProcessor{fc: content, lineOffsets: computeLineOffsets(content)}
+
+			line, _ := mp.getLineInfo(tt.offset)
+			if line != tt.expected {
+				t.Errorf("getLineInfo(%d).line = %d, want %d", tt.offset, line, tt.expected)
 			}
 		})
 	}

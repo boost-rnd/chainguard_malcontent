@@ -15,12 +15,12 @@ func TestJSONLineInfoOutput(t *testing.T) {
 		behaviors []*malcontent.Behavior
 	}{
 		{
-			name: "Line info disabled - no line numbers",
+			name: "Line info - no line numbers",
 			behaviors: []*malcontent.Behavior{
 				{
 					ID:             "test/behavior",
 					Description:    "Test behavior",
-					StartingLine:   0, // Should be 0 when line info is disabled
+					StartingLine:   0,
 					EndingLine:     0,
 					StartingOffset: 0,
 					EndingOffset:   0,
@@ -45,7 +45,7 @@ func TestJSONLineInfoOutput(t *testing.T) {
 			},
 		},
 		{
-			name: "Line info enabled - multi-line match",
+			name: "Line info - multi-line match",
 			behaviors: []*malcontent.Behavior{
 				{
 					ID:             "net/http",
@@ -61,7 +61,7 @@ func TestJSONLineInfoOutput(t *testing.T) {
 			},
 		},
 		{
-			name: "Line info enabled - multiple behaviors",
+			name: "Line info - multiple behaviors",
 			behaviors: []*malcontent.Behavior{
 				{
 					ID:             "crypto/aes",

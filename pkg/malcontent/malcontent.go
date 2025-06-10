@@ -50,6 +50,14 @@ type Behavior struct {
 	Description string `json:",omitempty" yaml:",omitempty"`
 	// MatchStrings are all strings found relating to this behavior
 	MatchStrings []string `json:",omitempty" yaml:",omitempty"`
+	// StartingLine is the line number where the match starts
+	StartingLine int `json:",omitempty" yaml:",omitempty"`
+	// EndingLine is the line number where the match ends
+	EndingLine int `json:",omitempty" yaml:",omitempty"`
+	// StartingOffset is the character offset on the starting line where the match begins
+	StartingOffset int `json:",omitempty" yaml:",omitempty"`
+	// EndingOffset is the character offset on the ending line where the match ends
+	EndingOffset int `json:",omitempty" yaml:",omitempty"`
 	RiskScore    int
 	RiskLevel    string `json:",omitempty" yaml:",omitempty"`
 

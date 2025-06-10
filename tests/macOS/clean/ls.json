@@ -22,6 +22,10 @@
                         "http://crl.apple.com/codesigning.crl0",
                         "https://www.apple.com/appleca/0"
                     ],
+                    "StartingLine": 64,
+                    "EndingLine": 301,
+                    "StartingOffset": 110,
+                    "EndingOffset": 91,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/addr/url.yara#binary_with_url",
@@ -33,6 +37,10 @@
                     "MatchStrings": [
                         "TERM"
                     ],
+                    "StartingLine": 51,
+                    "EndingLine": 269,
+                    "StartingOffset": 165,
+                    "EndingOffset": 168,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exec/shell/TERM.yara#TERM",
@@ -49,6 +57,10 @@
                         "_fts_open",
                         "_fts_set"
                     ],
+                    "StartingLine": 56,
+                    "EndingLine": 276,
+                    "StartingOffset": 4494,
+                    "EndingOffset": 804,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/directory/directory-traverse.yara#fts",
@@ -60,6 +72,10 @@
                     "MatchStrings": [
                         "readlink"
                     ],
+                    "StartingLine": 56,
+                    "EndingLine": 276,
+                    "StartingOffset": 4991,
+                    "EndingOffset": 1050,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/link-read.yara#readlink",
@@ -72,6 +88,10 @@
                     "MatchStrings": [
                         "http"
                     ],
+                    "StartingLine": 64,
+                    "EndingLine": 301,
+                    "StartingOffset": 110,
+                    "EndingOffset": 57,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/http.yara#http",
@@ -83,6 +103,10 @@
                     "MatchStrings": [
                         "getenv"
                     ],
+                    "StartingLine": 56,
+                    "EndingLine": 276,
+                    "StartingOffset": 4641,
+                    "EndingOffset": 822,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/os/env/get.yara#getenv",

@@ -59,6 +59,7 @@ var (
 	ignoreSelfFlag            bool
 	ignoreTagsFlag            string
 	includeDataFilesFlag      bool
+	lineInfoFlag              bool
 	minFileLevelFlag          int
 	minFileRiskFlag           string
 	minLevelFlag              int
@@ -330,6 +331,12 @@ func main() {
 				Value:       false,
 				Usage:       "Include files that are detected as non-program (binary or source) files",
 				Destination: &includeDataFilesFlag,
+			},
+			&cli.BoolFlag{
+				Name:        "line-info",
+				Value:       false,
+				Usage:       "Include starting line numbers for matched patterns",
+				Destination: &lineInfoFlag,
 			},
 			&cli.IntFlag{
 				Name:        "jobs",

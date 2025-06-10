@@ -14,6 +14,10 @@
                     "MatchStrings": [
                         "while(!![])"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 2429,
+                    "EndingOffset": 2439,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/anti-static/obfuscation/bool.yara#js_while_true_obfuscation",
@@ -1813,6 +1817,10 @@
                         "\\x5c",
                         "\\x22"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 11,
+                    "EndingOffset": 115059,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/anti-static/obfuscation/hex.yara#excessive_hex_refs",
@@ -2046,6 +2054,10 @@
                         "return _0xc65b7",
                         "return _0xa137f"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 1453,
+                    "EndingOffset": 114682,
                     "RiskScore": 3,
                     "RiskLevel": "HIGH",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/anti-static/obfuscation/js.yara#js_hex_obfuscation",
@@ -2203,6 +2215,10 @@
                         "67-0x8",
                         "39*0x1"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 2461,
+                    "EndingOffset": 108765,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/anti-static/obfuscation/strtoi.yara#sketchy_parseint_math",
@@ -2215,6 +2231,10 @@
                         "-parseInt(",
                         "+parseInt("
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 2541,
+                    "EndingOffset": 3328,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/data/encoding/int.yara#js_parseInt_Math",
@@ -2226,6 +2246,10 @@
                     "MatchStrings": [
                         "mkdir"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 113027,
+                    "EndingOffset": 113031,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/directory/directory-create.yara#mkdir",
@@ -2238,6 +2262,10 @@
                     "MatchStrings": [
                         "C:/Wi"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 113980,
+                    "EndingOffset": 113984,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/path/windows_root.yara#windows_path",
@@ -2251,6 +2279,10 @@
                         "POST",
                         "http"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 90455,
+                    "EndingOffset": 114116,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/post.yara#http_post",
@@ -2262,6 +2294,10 @@
                     "MatchStrings": [
                         "webhook"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 64860,
+                    "EndingOffset": 90379,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/webhook.yara#webhook",
@@ -2273,6 +2309,10 @@
                     "MatchStrings": [
                         "else return!!"
                     ],
+                    "StartingLine": 1,
+                    "EndingLine": 1,
+                    "StartingOffset": 105700,
+                    "EndingOffset": 105712,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/sus/exclamation.yara#exclamations",

@@ -10,6 +10,10 @@
                     "MatchStrings": [
                         "System.Net.WebClient).DownloadFile('http"
                     ],
+                    "StartingLine": 14,
+                    "EndingLine": 20,
+                    "StartingOffset": 37,
+                    "EndingOffset": 76,
                     "RiskScore": 4,
                     "RiskLevel": "CRITICAL",
                     "RuleURL": "https://github.com/Neo23x0/signature-base/blob/391a990859091dbc4c21d15db335b371090f606e/yara/gen_powershell_susp.yar#L52-L91",
@@ -25,6 +29,10 @@
                     "MatchStrings": [
                         "https://github.com/aspdasdksa2/callback/raw/main/Client-built.exe"
                     ],
+                    "StartingLine": 14,
+                    "EndingLine": 20,
+                    "StartingOffset": 73,
+                    "EndingOffset": 137,
                     "RiskScore": 3,
                     "RiskLevel": "HIGH",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/tool_transfer/exe_url.yara#http_url_with_exe",
@@ -37,6 +45,10 @@
                         "github.com",
                         "raw/main"
                     ],
+                    "StartingLine": 14,
+                    "EndingLine": 20,
+                    "StartingOffset": 81,
+                    "EndingOffset": 120,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/tool_transfer/github.yara#github_raw_user",
@@ -49,6 +61,10 @@
                         "https://",
                         "Windows"
                     ],
+                    "StartingLine": 14,
+                    "EndingLine": 21,
+                    "StartingOffset": 73,
+                    "EndingOffset": 34,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/tool_transfer/os.yara#os_ref",
@@ -60,6 +76,10 @@
                     "MatchStrings": [
                         "powershell -Command"
                     ],
+                    "StartingLine": 4,
+                    "EndingLine": 20,
+                    "StartingOffset": 4,
+                    "EndingOffset": 23,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/exec/shell/powershell.yara#powershell",
@@ -71,6 +91,10 @@
                     "MatchStrings": [
                         "C:\\Windows"
                     ],
+                    "StartingLine": 14,
+                    "EndingLine": 21,
+                    "StartingOffset": 142,
+                    "EndingOffset": 23,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/fs/path/windows_root.yara#windows_path",
@@ -83,6 +107,10 @@
                         "alwarebytes",
                         "stopservice"
                     ],
+                    "StartingLine": 10,
+                    "EndingLine": 12,
+                    "StartingOffset": 28,
+                    "EndingOffset": 95,
                     "RiskScore": 4,
                     "RiskLevel": "CRITICAL",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/impact/degrade/edr.yara#win_edr_stopper",
@@ -94,6 +122,9 @@
                     "MatchStrings": [
                         "powershell -Command \"Add-MpPreference -ExclusionPath 'C:\\'\""
                     ],
+                    "StartingLine": 13,
+                    "EndingLine": 19,
+                    "EndingOffset": 62,
                     "RiskScore": 4,
                     "RiskLevel": "CRITICAL",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/impact/degrade/win_defender.yara#win_defender_exclusion",
@@ -107,6 +138,10 @@
                         "malwarebytes_assistant",
                         "N \"Malwarebytes"
                     ],
+                    "StartingLine": 10,
+                    "EndingLine": 12,
+                    "StartingOffset": 11,
+                    "EndingOffset": 76,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/malware/ref.yara#malware",
@@ -118,6 +153,10 @@
                     "MatchStrings": [
                         "DownloadFile"
                     ],
+                    "StartingLine": 14,
+                    "EndingLine": 20,
+                    "StartingOffset": 59,
+                    "EndingOffset": 70,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/download/download.yara#download",
@@ -129,6 +168,10 @@
                     "MatchStrings": [
                         "https://github.com/aspdasdksa2/callback/raw/main/Client-built.exe"
                     ],
+                    "StartingLine": 14,
+                    "EndingLine": 20,
+                    "StartingOffset": 73,
+                    "EndingOffset": 137,
                     "RiskScore": 1,
                     "RiskLevel": "LOW",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/url/embedded.yara#https_url",
@@ -140,6 +183,9 @@
                     "MatchStrings": [
                         "powershell -Command \"Start-Process -Verb RunAs -FilePath '%0' -ArgumentList 'a"
                     ],
+                    "StartingLine": 4,
+                    "EndingLine": 4,
+                    "EndingOffset": 81,
                     "RiskScore": 3,
                     "RiskLevel": "HIGH",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/privesc/runas.yara#runas_admin",
@@ -151,6 +197,10 @@
                     "MatchStrings": [
                         "taskkill"
                     ],
+                    "StartingLine": 16,
+                    "EndingLine": 22,
+                    "StartingOffset": 4,
+                    "EndingOffset": 11,
                     "RiskScore": 2,
                     "RiskLevel": "MEDIUM",
                     "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/process/terminate/taskkill.yara#taskkill",

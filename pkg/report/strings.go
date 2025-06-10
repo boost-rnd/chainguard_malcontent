@@ -2,6 +2,7 @@ package report
 
 import (
 	"slices"
+	"sort"
 	"sync"
 
 	yarax "github.com/VirusTotal/yara-x/go"
@@ -46,20 +47,30 @@ func (sp *StringPool) Intern(s string) string {
 	return s
 }
 
+type MatchResult struct {
+	Strings        []string
+	StartingLine   int
+	EndingLine     int
+	StartingOffset int
+	EndingOffset   int
+}
+
 type matchProcessor struct {
-	fc       []byte
-	pool     *StringPool
-	matches  []yarax.Match
-	patterns []yarax.Pattern
-	mu       sync.Mutex
+	fc          []byte
+	pool        *StringPool
+	matches     []yarax.Match
+	patterns    []yarax.Pattern
+	mu          sync.Mutex
+	lineOffsets []int
 }
 
 func newMatchProcessor(fc []byte, matches []yarax.Match, mp []yarax.Pattern) *matchProcessor {
 	return &matchProcessor{
-		fc:       fc,
-		pool:     NewStringPool(len(matches)),
-		matches:  matches,
-		patterns: mp,
+		fc:          fc,
+		pool:        NewStringPool(len(matches)),
+		matches:     matches,
+		patterns:    mp,
+		lineOffsets: computeLineOffsets(fc),
 	}
 }
 
@@ -72,9 +83,9 @@ var matchResultPool = sync.Pool{
 
 // process performantly handles the conversion of matched data to strings.
 // yara-x does not expose the rendered string via the API due to performance overhead.
-func (mp *matchProcessor) process() []string {
+func (mp *matchProcessor) process() *MatchResult {
 	if len(mp.matches) == 0 {
-		return nil
+		return &MatchResult{}
 	}
 
 	mp.mu.Lock()
@@ -89,6 +100,10 @@ func (mp *matchProcessor) process() []string {
 		result = &slice
 	}
 	defer matchResultPool.Put(result)
+
+	// Track the overall range of matches
+	var startingLine, endingLine, startingOffset, endingOffset int
+	firstMatch := true
 
 	initializeOnce.Do(func() {
 		matchPool = pool.NewBufferPool(len(mp.matches))
@@ -119,6 +134,8 @@ func (mp *matchProcessor) process() []string {
 			} else {
 				*result = append(*result, mp.pool.Intern(string(matchBytes)))
 			}
+
+			mp.updateLineInfo(o, l, &startingLine, &endingLine, &startingOffset, &endingOffset, &firstMatch)
 		} else {
 			if patterns == nil || cap(patterns) < patternsCap {
 				patterns = make([]string, 0, patternsCap)
@@ -129,13 +146,54 @@ func (mp *matchProcessor) process() []string {
 				patterns = append(patterns, p.Identifier())
 			}
 			*result = append(*result, slices.Compact(patterns)...)
+
+			mp.updateLineInfo(o, l, &startingLine, &endingLine, &startingOffset, &endingOffset, &firstMatch)
 		}
 	}
 
 	finalResult := make([]string, len(*result))
 	copy(finalResult, *result)
 
-	return finalResult
+	return &MatchResult{
+		Strings:        finalResult,
+		StartingLine:   startingLine,
+		EndingLine:     endingLine,
+		StartingOffset: startingOffset,
+		EndingOffset:   endingOffset,
+	}
+}
+
+// updateLineInfo updates the line and offset tracking for a match.
+func (mp *matchProcessor) updateLineInfo(offset, length int, startLine, endLine, startOffset, endOffset *int, firstMatch *bool) {
+	ml, mo := mp.getLineInfo(offset)
+	el, eo := mp.getLineInfo(offset + length - 1)
+
+	if *firstMatch {
+		*startLine, *startOffset = ml, mo
+		*endLine, *endOffset = el, eo
+		*firstMatch = false
+		return
+	}
+	if ml < *startLine || (ml == *startLine && mo < *startOffset) {
+		*startLine, *startOffset = ml, mo
+	}
+	if el > *endLine || (el == *endLine && eo > *endOffset) {
+		*endLine, *endOffset = el, eo
+	}
+}
+
+func (mp *matchProcessor) getLineInfo(pos int) (line, char int) {
+	// find highest index i where offsets[i] <= pos
+	if pos < 0 || pos >= len(mp.fc) {
+		return 1, 0
+	}
+	idx := sort.Search(len(mp.lineOffsets), func(i int) bool {
+		return mp.lineOffsets[i] > pos
+	}) - 1
+	if idx < 0 {
+		idx = 0
+	}
+	return idx + 1, pos - mp.lineOffsets[idx]
 }
 
 // containsUnprintable determines if a byte is a valid character.
@@ -146,4 +204,14 @@ func containsUnprintable(b []byte) bool {
 		}
 	}
 	return false
+}
+
+func computeLineOffsets(content []byte) []int {
+	offsets := []int{0}
+	for i, b := range content {
+		if b == '\n' {
+			offsets = append(offsets, i+1)
+		}
+	}
+	return offsets
 }
